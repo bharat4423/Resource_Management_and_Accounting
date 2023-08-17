@@ -1,0 +1,40 @@
+
+------------OnClient -pbs-node1--------------------
+Go to node 1
+yum install git -y
+#then clone git repository
+git clone https://github.com/openpbs/openpbs.git
+
+
+
+STEP 1: Excute below commands
+./autogen.sh
+
+#check error and see the supported packages using belowcommands
+yum provides */autoreconf
+yum install autoconf automake libtool -you
+./autogen.sh
+mkdir -p /opt/pbs
+
+./configure --prefix=/opt/pbs
+yum provides */openssl/aes.h
+yum install openssl-devel-1.0.2k-26.el7_9.x86_64 -y
+ 
+#if you getting dependency packages errors then run below command
+ 
+yum install libtool-ltdl-devel hwloc-devel libXt-devel libedit-devel libical-devel ncurses-devel postgresql-devel postgresql-contrib python3-devel tcl-devel tk-devel zlib-devel expat-devel openssl-devel -y
+ 
+#then run the below command
+./configure --prefix=/opt/pbs
+
+make
+yum provides */usr/bin/swig
+yum install swig
+ 
+make
+make install
+
+. /opt/pbs/etc/pbs.sh
+chmod +x /opt/pbs/etc/pbs.sh
+bash /opt/pbs/etc/pbs.sh
+export PATH=${PATH}:/opt/pbs/bin
